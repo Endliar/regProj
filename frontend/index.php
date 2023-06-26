@@ -27,8 +27,8 @@
         <?php
         include "C:/xampp/htdocs/regProj/ConfigPageLinks/Pagination.php";
         include "C:/xampp/htdocs/regProj/ConnectToDb/Database.php";
-
         $pagination = new \dbProject\ConfigPageLinks\Pagination();
+        $date = $pagination->date;
         $database = new \dbProject\ConnectToDb\Database("localhost", "endliar", "0611", "example");
         $offset = $pagination->getOffSet();
         $result = $database->query("SELECT * FROM Client LIMIT {$offset}, {$pagination->limit}");
@@ -45,14 +45,17 @@
                             <td>{$row['position']}</td>
                             <td>{$row['phone_1']}</td>
                             <td>
-                                <a class = 'btn btn-primary btn-sm' href='/pages/edit.php?id=$row[id]'>Update</a>
-                                <a class = 'btn btn-danger btn-sm' href='/pages/delete.php?id=$row[id]'>Delete</a>
+                                <a class = 'btn btn-primary btn-sm' href='/regProj/pages/edit.php?id=$row[id]'>Update</a>
+                                <a class = 'btn btn-danger btn-sm' href='/regProj/pages/delete.php?id=$row[id]'>Delete</a>
                             </td>
                         </tr>
                     </tbody>
                 ";
+            if (count($row) > 0) {
+                $date = true;
+            }
 }
-echo $pagination->links();
+echo $pagination->links($date);
 ?>
     </table>
 </body>
