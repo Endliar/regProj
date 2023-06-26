@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+include "C:/xampp/htdocs/regProj/ConfigPageLinks/Pagination.php";
+include "C:/xampp/htdocs/regProj/ConnectToDb/Database.php";
+
+$database = new \dbProject\ConnectToDb\Database("localhost", "endliar", "0611", "example");
+
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    $result = $database->query("DELETE FROM Client WHERE id = '$id'");
+}
+
+header("location: /regProj/frontend/index.php");
+exit;
+?>
